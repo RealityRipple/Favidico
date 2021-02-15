@@ -1,0 +1,8 @@
+#favicon-reload
+{
+ list-style-image: url("chrome://favidico/skin/favidico16.png");
+}
+#favicon-reload[disabled]
+{
+ list-style-image: url("chrome://favidico/skin/favidico16-gs.png");
+}

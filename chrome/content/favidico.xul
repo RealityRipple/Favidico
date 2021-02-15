@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!DOCTYPE dialog SYSTEM "chrome://favidico/locale/favidico.dtd">
+<overlay id="favidico" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+ <script type="application/x-javascript" src="chrome://favidico/content/favidico.js"/>
+ <popup id="contentAreaContextMenu">
+  <menuitem id="favicon-reload"
+            insertafter="context-reload"
+            label="&reloadfavicon.label;"
+            oncommand="gFavidico.reloadFavicon();"/>
+ </popup>
+</overlay>

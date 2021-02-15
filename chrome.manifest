@@ -1,16 +1,16 @@
-content     identfavicon                           content/
-skin        identfavicon classic/1.0               skin/
-locale	    identfavicon			   en-US locale/en-US/
-locale	    identfavicon			   es-ES locale/es-ES/
-locale	    identfavicon			   fr locale/fr/
-locale	    identfavicon			   hu-HU locale/hu-HU/
-locale	    identfavicon			   ja locale/ja/
-locale	    identfavicon			   pl locale/pl/
-locale	    identfavicon			   pt-BR locale/pt-BR/
-locale	    identfavicon			   sr locale/sr/
-locale	    identfavicon			   sv-SE locale/sv-SE/
-locale	    identfavicon			   de locale/de/
-locale	    identfavicon			   zh-CN locale/zh-CN/
-locale	    identfavicon			   tr locale/tr/
-overlay     chrome://browser/content/browser.xul   chrome://identfavicon/content/identfavicon.xul
-style	    chrome://browser/content/browser.xul   chrome://identfavicon/skin/identfavicon.css
+content favidico       chrome/content/
+locale  favidico	de    chrome/locale/de/
+locale  favidico	en-US chrome/locale/en-US/
+locale  favidico es-ES chrome/locale/es-ES/
+locale  favidico fr    chrome/locale/fr/
+locale  favidico hu-HU chrome/locale/hu-HU/
+locale  favidico ja    chrome/locale/ja/
+locale  favidico pl    chrome/locale/pl/
+locale  favidico pt-BR chrome/locale/pt-BR/
+locale  favidico sr    chrome/locale/sr/
+locale  favidico sv-SE chrome/locale/sv-SE/
+locale  favidico tr    chrome/locale/tr/
+locale  favidico zh-CN chrome/locale/zh-CN/
+skin    favidico skin  chrome/skin/
+overlay chrome://browser/content/browser.xul chrome://favidico/content/favidico.xul
+style   chrome://browser/content/browser.xul chrome://favidico/skin/favidico.css
