@@ -4,6 +4,7 @@ Favidico is based on the [idea of Don Park](http://www.docuverse.com/blog/donpar
 
 #### Supports
  * Pale Moon [25.0a1pre - 29.*]
+ * Firefox [3.0 - 50.*]
 
 ## Building
 Simply download the contents of the repository and pack the src folder into a .zip file. Then, rename the file to .xpi and drag into the browser.

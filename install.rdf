@@ -5,6 +5,14 @@
   <em:id>{4A58EA2B-3B5D-5DEE-A953-F58A3719D382}</em:id>
   <em:version>1.0</em:version>
   <em:type>2</em:type>
+  <!-- Firefox -->
+  <em:targetApplication>
+   <Description>
+    <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+    <em:minVersion>3.0</em:minVersion>
+    <em:maxVersion>50.*</em:maxVersion>
+   </Description>
+  </em:targetApplication>
   <!-- Pale Moon -->
   <em:targetApplication>
    <Description>
