@@ -206,6 +206,8 @@ var gFavidico = {
     },
 
     checkIconURL: function(aTab, aDoc, aIconURL, aThreadId) {
+ if (aIconURL.substr(0, 5) === 'data:')
+	    return;
 	var sitepref = this.mSitePrefs[this.getDocumentURI(aDoc).host];
 	this.debug(aThreadId + ': Checking favicon at ' + aIconURL + ', site pref: ' + sitepref);
 	aTab.mFavidicoThreadId = aThreadId;
