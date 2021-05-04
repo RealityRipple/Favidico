@@ -1,6 +1,6 @@
 content favidico       chrome/content/
-locale  favidico	de    chrome/locale/de/
-locale  favidico	en-US chrome/locale/en-US/
+locale  favidico de    chrome/locale/de/
+locale  favidico en-US chrome/locale/en-US/
 locale  favidico es-ES chrome/locale/es-ES/
 locale  favidico fr    chrome/locale/fr/
 locale  favidico hu-HU chrome/locale/hu-HU/

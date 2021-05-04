@@ -1,15 +1,15 @@
-<!ENTITY reloadfavicon.label	    	"Reload Page Favicon">
-<!ENTITY preferences.title	      	"Favidico Preferences">
-<!ENTITY contextmenugroup.caption	"Context Menu Behavior:">
-<!ENTITY addcontextmenuitem.label	"Add &quot;Reload&quot; to context menu">
-<!ENTITY addtabmenuitem.label	    "Add &quot;Reload&quot; to tab menu">
-<!ENTITY sites.caption			         "Force List:">
-<!ENTITY column.site		           	"Host">
-<!ENTITY column.state		          	"Identicon">
-<!ENTITY siteaddress.label		      "Host URL">
-<!ENTITY desc.sitepref		         	"Generate an identicon:">
-<!ENTITY button.always			         "Always">
-<!ENTITY button.never		          	"Never">
-<!ENTITY button.remove		         	"Remove URL">
-<!ENTITY button.removeall	       	"Remove All URLs">
-<!ENTITY button.clearicons	      	"Clear Generated Icons">
+<!ENTITY reloadfavicon.label      "Reload Page Favicon">
+<!ENTITY preferences.title        "Favidico Preferences">
+<!ENTITY contextmenugroup.caption "Context Menu Behavior:">
+<!ENTITY addcontextmenuitem.label "Add &quot;Reload&quot; to context menu">
+<!ENTITY addtabmenuitem.label     "Add &quot;Reload&quot; to tab menu">
+<!ENTITY sites.caption            "Force List:">
+<!ENTITY column.site              "Host">
+<!ENTITY column.state             "Identicon">
+<!ENTITY siteaddress.label        "Host URL">
+<!ENTITY desc.sitepref            "Generate an identicon:">
+<!ENTITY button.always            "Always">
+<!ENTITY button.never             "Never">
+<!ENTITY button.remove            "Remove URL">
+<!ENTITY button.removeall         "Remove All URLs">
+<!ENTITY button.clearicons        "Clear Generated Icons">
