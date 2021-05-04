@@ -133,6 +133,7 @@ var gFavidico = {
 
     onSiteSelected: function() {	
 	document.getElementById("btnRemove").disabled = this.mView.selection.getRangeCount() == 0;
+	document.getElementById("btnRemoveAll").disabled = this.mView.states.length == 0;
     },
 
     addSiteState: function(aState) {
@@ -186,6 +187,11 @@ var gFavidico = {
 	this.mView.states = [];
 	tbo.endUpdateBatch();
 	this.updatePrefs();
+ if (this.mView.states.length == 0)
+  document.getElementById("btnRemove").disabled = true;
+ else
+ 	document.getElementById("btnRemove").disabled = this.mView.selection.getRangeCount() == 0;
+	document.getElementById("btnRemoveAll").disabled = this.mView.states.length == 0;
     },
 
     removeSelectedSites: function() {
@@ -203,6 +209,7 @@ var gFavidico = {
 	selection.clearSelection();
 	tree.treeBoxObject.endUpdateBatch();
 	this.updatePrefs();
+	document.getElementById("btnRemoveAll").disabled = this.mView.states.length == 0;
     },
 
     clearHistoryIcons: function(aResult) {
