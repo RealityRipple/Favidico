@@ -242,7 +242,8 @@ var gFavidico = {
 	    .getService(Components.interfaces.nsIPromptService);
 	    var title = this.mBundle.getString("askClearIconsTitle");
 	    var message = this.mBundle.getString("askClearIconsMsg");
-	    if (!promptService.confirm(window, title, message))
+     var dummy = {value:false};
+	    if (promptService.confirmEx(window, title, message, promptService.STD_YES_NO_BUTTONS, null, null, null, null, dummy) != 0)
 	        return;
 
 	    // clear icons in history...
