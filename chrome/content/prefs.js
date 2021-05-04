@@ -31,8 +31,6 @@ var gFavidico = {
     mFavidico: Components.classes["@mozilla.org/appshell/window-mediator;1"]
     .getService(Components.interfaces.nsIWindowMediator)
     .getMostRecentWindow("navigator:browser").gFavidico,
-    mLtrAtom: Components.classes["@mozilla.org/atom-service;1"]
-    .getService(Components.interfaces.nsIAtomService).getAtom("ltr"),
     mCanvas: document.createElementNS("http://www.w3.org/1999/xhtml","html:canvas"),
 
     SiteState: function(aHost, aState) {
@@ -66,7 +64,7 @@ var gFavidico = {
 	    else if (aColumn.id == "trcState") return this.states[aRow].stateStr;
 	    return "";
 	},
-	getCellProperties: function(row,column,prop) { prop.AppendElement(gFavidico.mLtrAtom); },
+	getCellProperties: function(row,column) { return "ltr"; },
 	cycleHeader: function(aCol) { this.sortOnColumn(aCol.id, -this.sortOrder); },
 	sortOnColumn: function(aCol, aOrd) {
 	    if (this.sortCol != aCol) {
