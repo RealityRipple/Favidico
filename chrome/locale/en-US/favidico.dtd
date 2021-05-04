@@ -3,13 +3,13 @@
 <!ENTITY contextmenugroup.caption	"Context Menu Behavior:">
 <!ENTITY addcontextmenuitem.label	"Add &quot;Reload&quot; to context menu">
 <!ENTITY addtabmenuitem.label	    "Add &quot;Reload&quot; to tab menu">
-<!ENTITY sites.caption			         "Sites">
-<!ENTITY column.site		           	"Site">
-<!ENTITY column.state		          	"State">
-<!ENTITY siteaddress.label		      "Address of Web Site">
-<!ENTITY desc.sitepref		         	"When to generate a favicon for the above site?">
+<!ENTITY sites.caption			         "Force List:">
+<!ENTITY column.site		           	"Host">
+<!ENTITY column.state		          	"Identicon">
+<!ENTITY siteaddress.label		      "Host URL">
+<!ENTITY desc.sitepref		         	"Generate an identicon:">
 <!ENTITY button.always			         "Always">
 <!ENTITY button.never		          	"Never">
-<!ENTITY button.remove		         	"Remove Site">
-<!ENTITY button.removeall	       	"Remove All Sites">
+<!ENTITY button.remove		         	"Remove URL">
+<!ENTITY button.removeall	       	"Remove All URLs">
 <!ENTITY button.clearicons	      	"Clear Generated Icons">

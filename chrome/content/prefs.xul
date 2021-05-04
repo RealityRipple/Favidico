@@ -20,7 +20,8 @@
    <label control="tbSite" value="&siteaddress.label;:" />
    <textbox id="tbSite" oninput="gFavidico.onHostInput(event.target);" onkeypress="gFavidico.onHostKeyPress(event);" />
    <hbox align="center">
-	   <description flex="1">&desc.sitepref;</description>
+	   <spacer flex="1"/>
+	   <description>&desc.sitepref;</description>
 	   <button id="btnAlways" label="&button.always;" disabled="true" oncommand="gFavidico.addSiteState(1);"/>
    	<button id="btnNever" label="&button.never;" disabled="true" oncommand="gFavidico.addSiteState(0);"/>
    </hbox>
@@ -28,17 +29,21 @@
    <tree id="trSites" onselect="gFavidico.onSiteSelected();" hidecolumnpicker="true" style="height: 18em;" flex="1">
     <treecols>
 	    <treecol id="trcSite" label="&column.site;" flex="1"/>
+     <splitter class="tree-splitter" />
 	    <treecol id="trcState" label="&column.state;"/>
 	   </treecols>
 	   <treechildren/>
    </tree>
    <hbox pack="start">
 	   <button id="btnRemove" label="&button.remove;" disabled="true" oncommand="gFavidico.removeSelectedSites()"/>
-	   <button id="btnRemoveAll" label="&button.removeall;" oncommand="gFavidico.removeAllSites()"/>
 	   <spacer flex="1"/>
-   	<button id="btnClearIcons" label="&button.clearicons;" oncommand="gFavidico.clearIcons()"/>
+	   <button id="btnRemoveAll" label="&button.removeall;" oncommand="gFavidico.removeAllSites()"/>
    </hbox>
   </groupbox>
+  <hbox>
+   <button id="btnClearIcons" label="&button.clearicons;" oncommand="gFavidico.clearIcons()"/>
+   <spacer flex="1"/>
+  </hbox>
  </prefpane>
  <stringbundle id="bundle" src="chrome://favidico/locale/favidico.properties"/>
  <script type="application/x-javascript" src="chrome://favidico/content/prefs.js"/>
