@@ -1,7 +1,8 @@
 <!ENTITY reloadfavicon.label	    	"Reload Page Favicon">
 <!ENTITY preferences.title	      	"Favidico Preferences">
-<!ENTITY contextmenugroup.caption	"Context Menu Behavior">
-<!ENTITY addcontextmenuitem.label	"Add &quot;Reload&quot; context menu item">
+<!ENTITY contextmenugroup.caption	"Context Menu Behavior:">
+<!ENTITY addcontextmenuitem.label	"Add &quot;Reload&quot; to context menu">
+<!ENTITY addtabmenuitem.label	    "Add &quot;Reload&quot; to tab menu">
 <!ENTITY sites.caption			         "Sites">
 <!ENTITY column.site		           	"Site">
 <!ENTITY column.state		          	"State">

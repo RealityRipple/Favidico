@@ -6,12 +6,14 @@
  <prefpane flex="1">
   <preferences>
    <preference id="prefAddContextMenuItem" name="extensions.favidico.addcontextmenuitem" type="bool" />
+   <preference id="prefAddTabMenuItem" name="extensions.favidico.addtabmenuitem" type="bool" />
    <preference id="prefSitesAlways" name="extensions.favidico.sites.always" type="string" />
    <preference id="prefSitesNever" name="extensions.favidico.sites.never" type="string" />
   </preferences>
   <groupbox>
    <caption label="&contextmenugroup.caption;" />
    <checkbox label="&addcontextmenuitem.label;" preference="prefAddContextMenuItem" />
+   <checkbox label="&addtabmenuitem.label;" preference="prefAddTabMenuItem" />
   </groupbox>
   <groupbox flex="1">
    <caption label="&sites.caption;" />

@@ -8,4 +8,10 @@
             label="&reloadfavicon.label;"
             oncommand="gFavidico.reloadFavicon();"/>
  </popup>
+ <menupopup id="tabContextMenu">
+  <menuitem id="favicon-reloadTab"
+            insertafter="context_reloadTab"
+            label="&reloadfavicon.label;"
+            oncommand="gFavidico.reloadTabFavicon();"/>
+ </menupopup>
 </overlay>

@@ -344,6 +344,31 @@ var gFavidico = {
 	}
     },
 
+    reloadTabFavicon: function() {
+	try {
+	    var threadId = this.mThreadId++;
+	    var doc = TabContextMenu.contextTab.linkedBrowser.contentDocument;
+	    var docURI = this.getDocumentURI(doc);
+	    if (!doc.contentType || doc.contentType.match('^image/.+$') ||
+		!gBrowser.shouldLoadFavIcon(docURI))
+		return;
+	    this.debug(threadId + ": Reloading favicon for " + docURI.spec);
+	    var tabs = this.getTabsForDocument(docURI);
+	    if (tabs.length > 0) {
+		var iconURL = this.getExplicitFaviconURL(doc) || docURI.prePath + "/favicon.ico";
+		var iconURI = this.mIOS.newURI(iconURL, null, this.getDocumentBaseURI(doc));
+		gBrowser.mFaviconService.removeFailedFavicon(iconURI);
+		for (var i = 0; i < tabs.length; ++i) {
+		    gBrowser.setIcon(tabs[i], iconURL);
+		    this.checkIconURL(tabs[i], doc, iconURL, threadId);
+		}
+	    }
+	} catch (ex) {
+	    if (this.mPrefs.getBoolPref("debug"))
+		alert("reloadFavicon() threw exception " + ex);
+	}
+    },
+
     debug: function(aMessage) {
 	if (this.mPrefs.getBoolPref("debug"))
 	    this.mConsole.logStringMessage("Favidico: " + aMessage);
@@ -363,6 +388,23 @@ var gFavidico = {
 	} catch (ex) {
 	    if (this.mPrefs.getBoolPref("debug"))
 		alert("showContextMenuItem() threw exception " + ex);
+	}
+    },
+ 
+    showTabContextMenuItem: function(aEvent) {
+	try {
+	    if (this.mPrefs.getBoolPref("addtabmenuitem")) {
+		document.getElementById("favicon-reloadTab").hidden = false;
+		var doc = TabContextMenu.contextTab.linkedBrowser.contentDocument;
+		var docURI = this.getDocumentURI(doc);
+		this.debug("showTabContextMenuItem() " + docURI.spec);
+		document.getElementById("favicon-reloadTab").disabled = !gBrowser.shouldLoadFavIcon(docURI);
+	    } else {
+		document.getElementById("favicon-reloadTab").hidden = true;
+	    }
+	} catch (ex) {
+	    if (this.mPrefs.getBoolPref("debug"))
+		alert("showTabContextMenuItem() threw exception " + ex);
 	}
     },
 
@@ -391,6 +433,10 @@ var gFavidico = {
 	// register context menu listener
 	document.getElementById('contentAreaContextMenu')
 	.addEventListener('popupshowing', this.bind(this.showContextMenuItem), false);
+
+	// register tab context menu listener
+	document.getElementById('tabContextMenu')
+	.addEventListener('popupshowing', this.bind(this.showTabContextMenuItem), false);
 
 	// add preference observer
 	this.mPrefs.QueryInterface(Components.interfaces.nsIPrefBranch2);
