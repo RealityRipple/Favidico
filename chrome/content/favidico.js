@@ -290,7 +290,7 @@ var gFavidico = {
     createFavicon: function(aTab, aDoc, aThreadId) {
         var docURI = this.getDocumentURI(aDoc);
         this.debug(aThreadId + ': Generating identicon for ' + docURI.spec);
-        var canvas = aDoc.createElement("canvas");
+        var canvas = document.createElementNS("http://www.w3.org/1999/xhtml", "canvas");
    var iconURL = this.createIconDataURL(canvas, docURI);
    if (aTab.mFavidicoThreadId == aThreadId)
        gBrowser.setIcon(aTab, iconURL);
