@@ -274,6 +274,9 @@ var gFavidico = {
             var rel = links.item(i).getAttribute('rel');
             if (rel && (rel.toLowerCase() == 'shortcut icon' || rel.toLowerCase() == 'icon')) {
                 var iconHref = links.item(i).getAttribute('href');
+                if (iconHref == '') {
+                    continue;
+                }
                 return this.mIOS.newURI(iconHref, null, this.getDocumentBaseURI(aDoc)).spec;
             }
         }
