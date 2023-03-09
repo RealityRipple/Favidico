@@ -3,7 +3,7 @@
  <Description about="urn:mozilla:install-manifest">
   <em:name>Favidico</em:name>
   <em:id>{4A58EA2B-3B5D-5DEE-A953-F58A3719D382}</em:id>
-  <em:version>32.0</em:version>
+  <em:version>32.1</em:version>
   <em:type>2</em:type>
   <em:targetApplication>
    <Description>
