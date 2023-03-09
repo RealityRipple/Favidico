@@ -222,9 +222,27 @@ var gFavidico = {
             icon.onload = function() {
                 gFavidico.debug(aThreadId + ": Image " + icon.width + "x" + icon.height + " loaded from " + aIconURL);
                 if (icon.width < 4 || icon.height < 4) {
-                    // not a valid favicon, generate one
-                    gFavidico.debug(aThreadId + ": Failed to load icon from " + aIconURL + ": Error " + x.status);
-                    gFavidico.createFaviconDelayed(aTab, aDoc, aThreadId);
+                    var x = new XMLHttpRequest();
+                    x.open('GET', aIconURL);
+                    x.onreadystatechange = function() {
+                        if (x.readyState !== 4) {
+                            return;
+                        }
+                        x.onreadystatechange = null;
+                        if (Math.floor(x.status / 100) === 2) {
+                            if (x.responseText !== '') {
+                                if (x.responseText.length > 5 && x.responseText.slice(0, 5).toUpperCase() === '<SVG ') {
+                                    // svg favicons get a pass because implied width and height values
+                                    // aren't populated unless the img element is added to the document
+                                    return;
+                                }
+                            }
+                        }
+                        // not a valid favicon, generate one
+                        gFavidico.debug(aThreadId + ": Failed to load icon from " + aIconURL + ": Error " + x.status);
+                        gFavidico.createFaviconDelayed(aTab, aDoc, aThreadId);
+                    };
+                    x.send();
                 }
             }
             icon.onerror = function() {
