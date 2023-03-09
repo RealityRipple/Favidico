@@ -111,19 +111,19 @@ var gFavidico = {
             var red = (code >> 27) & 31;
             var color = "rgb(" + (red << 3) + "," + (green << 3) + "," + (blue << 3) + ")";
 
-       gFavidico.debug('Identicon patches: ' +
-              middleType + ' ' + cornerType + ' ' + sideType + ' ' +
-              middleInvert + ' ' + cornerInvert + ' ' + sideInvert);
+            gFavidico.debug('Identicon patches: ' +
+                                middleType + ' ' + cornerType + ' ' + sideType + ' ' +
+                                middleInvert + ' ' + cornerInvert + ' ' + sideInvert);
 
-       // avoid accidental swastikas
-       if ((middleType == 0 && cornerType == 0 && sideType == 10 &&
-        middleInvert != cornerInvert && cornerInvert == sideInvert) ||
-       // http://www.aplumbers.com/contact-us.php
-       (middleType == 0 && cornerType == 10 && sideType == 10 &&
-        middleInvert == cornerInvert && cornerInvert != sideInvert)) {
-       this.render(node, (1<<31)-code, size);
-       return;
-       }
+            // avoid accidental swastikas
+            if ((middleType == 0 && cornerType == 0 && sideType == 10 &&
+                 middleInvert != cornerInvert && cornerInvert == sideInvert) ||
+                // http://www.aplumbers.com/contact-us.php
+                (middleType == 0 && cornerType == 10 && sideType == 10 &&
+                 middleInvert == cornerInvert && cornerInvert != sideInvert)) {
+                this.render(node, (1<<31)-code, size);
+                return;
+            }
 
             var ctx = node.getContext("2d");
 
@@ -201,47 +201,47 @@ var gFavidico = {
     mThreadId: 0,
 
     bind: function(aFunc, aObj) {
-   if (!aObj) aObj = this;
-   return function() { return aFunc.apply(aObj, arguments); };
+        if (!aObj) aObj = this;
+        return function() { return aFunc.apply(aObj, arguments); };
     },
 
     checkIconURL: function(aTab, aDoc, aIconURL, aThreadId) {
- if (aIconURL.substr(0, 5) === 'data:')
-       return;
-   var sitepref = this.mSitePrefs[this.getDocumentURI(aDoc).host];
-   this.debug(aThreadId + ': Checking favicon at ' + aIconURL + ', site pref: ' + sitepref);
-   aTab.mFavidicoThreadId = aThreadId;
-   if (sitepref < 0) {
-       // do nothing
-   } else if (gBrowser.isFailedIcon(aIconURL) || sitepref > 0) {
+        if (aIconURL.substr(0, 5) === 'data:')
+            return;
+        var sitepref = this.mSitePrefs[this.getDocumentURI(aDoc).host];
+        this.debug(aThreadId + ': Checking favicon at ' + aIconURL + ', site pref: ' + sitepref);
+        aTab.mFavidicoThreadId = aThreadId;
+        if (sitepref < 0) {
+            // do nothing
+        } else if (gBrowser.isFailedIcon(aIconURL) || sitepref > 0) {
             // favicon loading failed in this session 
             this.createFavicon(aTab, aDoc, aThreadId);
         } else {
             // no favicon information so far, check for presence
-       var icon = new Image();
-       icon.onload = function() {
-       gFavidico.debug(aThreadId + ": Image " + icon.width + "x" + icon.height + " loaded from " + aIconURL);
-       if (icon.width < 4 || icon.height < 4) {
-           // not a valid favicon, generate one
-           gFavidico.debug(aThreadId + ": Image loaded from " + aIconURL + " is not a valid icon.");
-           gFavidico.createFaviconDelayed(aTab, aDoc, aThreadId);
-       }
-       }
-       icon.onerror = function() {
-       // favicon loading failed, generate one
-       gFavidico.debug(aThreadId + ": Failed to load icon from " + aIconURL);
-       gFavidico.createFaviconDelayed(aTab, aDoc, aThreadId);
-       }
-       icon.src = aIconURL;
+            var icon = new Image();
+            icon.onload = function() {
+                gFavidico.debug(aThreadId + ": Image " + icon.width + "x" + icon.height + " loaded from " + aIconURL);
+                if (icon.width < 4 || icon.height < 4) {
+                    // not a valid favicon, generate one
+                    gFavidico.debug(aThreadId + ": Failed to load icon from " + aIconURL + ": Error " + x.status);
+                    gFavidico.createFaviconDelayed(aTab, aDoc, aThreadId);
+                }
+            }
+            icon.onerror = function() {
+                // favicon loading failed, generate one
+                gFavidico.debug(aThreadId + ": Failed to load icon from " + aIconURL);
+                gFavidico.createFaviconDelayed(aTab, aDoc, aThreadId);
+            }
+            icon.src = aIconURL;
         }
     },
 
     createFaviconDelayed: function(aTab, aDoc, aThreadId) {
-   setTimeout(function() { gFavidico.createFavicon(aTab, aDoc, aThreadId); }, 500);
+        setTimeout(function() { gFavidico.createFavicon(aTab, aDoc, aThreadId); }, 500);
     },
 
     getDocumentBaseURI: function(aDoc) {
-   return this.mIOS.newURI(aDoc.baseURI, null, null);
+        return this.mIOS.newURI(aDoc.baseURI, null, null);
     },
 
     getDocumentURI: function(aDoc) {
@@ -253,15 +253,15 @@ var gFavidico = {
     },
 
     getTabsForDocument: function(aDocURI) {
-   var tabs = new Array();
-   for (var i = 0; i < gBrowser.mTabs.length; i++) {
-       var tab = gBrowser.mTabs[i];
-       if (gBrowser.getBrowserForTab(tab).currentURI.equals(aDocURI)) {
-       this.debug('Tab found for document ' + aDocURI.spec);
-       tabs.push(tab);
-       }
-   }
-   return tabs;
+        var tabs = new Array();
+        for (var i = 0; i < gBrowser.mTabs.length; i++) {
+            var tab = gBrowser.mTabs[i];
+            if (gBrowser.getBrowserForTab(tab).currentURI.equals(aDocURI)) {
+                this.debug('Tab found for document ' + aDocURI.spec);
+                tabs.push(tab);
+            }
+        }
+        return tabs;
     },
 
     getExplicitFaviconURL: function(aDoc) {
@@ -294,163 +294,163 @@ var gFavidico = {
         var docURI = this.getDocumentURI(aDoc);
         this.debug(aThreadId + ': Generating identicon for ' + docURI.spec);
         var canvas = document.createElementNS("http://www.w3.org/1999/xhtml", "canvas");
-   var iconURL = this.createIconDataURL(canvas, docURI);
-   if (aTab.mFavidicoThreadId == aThreadId)
-       gBrowser.setIcon(aTab, iconURL);
-   else
-       this.debug(aThreadId + ": Thread ID mismatch, tab's thread id = " + aTab.mFavidicoThreadId);
+        var iconURL = this.createIconDataURL(canvas, docURI);
+        if (aTab.mFavidicoThreadId == aThreadId)
+            gBrowser.setIcon(aTab, iconURL);
+        else
+            this.debug(aThreadId + ": Thread ID mismatch, tab's thread id = " + aTab.mFavidicoThreadId);
     },
 
     onPageShow: function(aEvent) {
-   try {
-       var threadId = this.mThreadId++;
-       var doc = aEvent.originalTarget;
-       var docURI = this.getDocumentURI(doc);
-       this.debug(threadId + ': onPageShow() ' + docURI.spec);
-       if (!doc.contentType || doc.contentType.match('^image/.+$') ||
-       !gBrowser.shouldLoadFavIcon(docURI))
-       return;
-       var tabs = this.getTabsForDocument(docURI);
-       if (tabs.length > 0) {
-       var iconURL = this.getExplicitFaviconURL(doc) || docURI.prePath + "/favicon.ico";
-       for (var i = 0; i < tabs.length; ++i)
-           this.checkIconURL(tabs[i], doc, iconURL, threadId);
-       }
-   } catch (ex) {
-       if (this.mPrefs.getBoolPref("debug"))
-       alert('onPageShow() threw exception ' + ex);
-   }
+        try {
+            var threadId = this.mThreadId++;
+            var doc = aEvent.originalTarget;
+            var docURI = this.getDocumentURI(doc);
+            this.debug(threadId + ': onPageShow() ' + docURI.spec);
+            if (!doc.contentType || doc.contentType.match('^image/.+$') ||
+                !gBrowser.shouldLoadFavIcon(docURI))
+                return;
+            var tabs = this.getTabsForDocument(docURI);
+            if (tabs.length > 0) {
+                var iconURL = this.getExplicitFaviconURL(doc) || docURI.prePath + "/favicon.ico";
+                for (var i = 0; i < tabs.length; ++i)
+                    this.checkIconURL(tabs[i], doc, iconURL, threadId);
+            }
+        } catch (ex) {
+            if (this.mPrefs.getBoolPref("debug"))
+                alert('onPageShow() threw exception ' + ex);
+        }
     },
 
     reloadFavicon: function() {
-   try {
-       var threadId = this.mThreadId++;
-       var doc = document.popupNode.ownerDocument;
-       var docURI = this.getDocumentURI(doc);
-       if (!doc.contentType || doc.contentType.match('^image/.+$') ||
-       !gBrowser.shouldLoadFavIcon(docURI))
-       return;
-       this.debug(threadId + ": Reloading favicon for " + docURI.spec);
-       var tabs = this.getTabsForDocument(docURI);
-       if (tabs.length > 0) {
-       var iconURL = this.getExplicitFaviconURL(doc) || docURI.prePath + "/favicon.ico";
-       var iconURI = this.mIOS.newURI(iconURL, null, this.getDocumentBaseURI(doc));
-       gBrowser.mFaviconService.removeFailedFavicon(iconURI);
-       for (var i = 0; i < tabs.length; ++i) {
-           gBrowser.setIcon(tabs[i], iconURL);
-           this.checkIconURL(tabs[i], doc, iconURL, threadId);
-       }
-       }
-   } catch (ex) {
-       if (this.mPrefs.getBoolPref("debug"))
-       alert("reloadFavicon() threw exception " + ex);
-   }
+        try {
+            var threadId = this.mThreadId++;
+            var doc = document.popupNode.ownerDocument;
+            var docURI = this.getDocumentURI(doc);
+            if (!doc.contentType || doc.contentType.match('^image/.+$') ||
+                !gBrowser.shouldLoadFavIcon(docURI))
+                return;
+            this.debug(threadId + ": Reloading favicon for " + docURI.spec);
+            var tabs = this.getTabsForDocument(docURI);
+            if (tabs.length > 0) {
+                var iconURL = this.getExplicitFaviconURL(doc) || docURI.prePath + "/favicon.ico";
+                var iconURI = this.mIOS.newURI(iconURL, null, this.getDocumentBaseURI(doc));
+                gBrowser.mFaviconService.removeFailedFavicon(iconURI);
+                for (var i = 0; i < tabs.length; ++i) {
+                    gBrowser.setIcon(tabs[i], iconURL);
+                    this.checkIconURL(tabs[i], doc, iconURL, threadId);
+                }
+            }
+        } catch (ex) {
+            if (this.mPrefs.getBoolPref("debug"))
+                alert("reloadFavicon() threw exception " + ex);
+        }
     },
 
     reloadTabFavicon: function() {
-   try {
-       var threadId = this.mThreadId++;
-       var doc = TabContextMenu.contextTab.linkedBrowser.contentDocument;
-       var docURI = this.getDocumentURI(doc);
-       if (!doc.contentType || doc.contentType.match('^image/.+$') ||
-       !gBrowser.shouldLoadFavIcon(docURI))
-       return;
-       this.debug(threadId + ": Reloading favicon for " + docURI.spec);
-       var tabs = this.getTabsForDocument(docURI);
-       if (tabs.length > 0) {
-       var iconURL = this.getExplicitFaviconURL(doc) || docURI.prePath + "/favicon.ico";
-       var iconURI = this.mIOS.newURI(iconURL, null, this.getDocumentBaseURI(doc));
-       gBrowser.mFaviconService.removeFailedFavicon(iconURI);
-       for (var i = 0; i < tabs.length; ++i) {
-           gBrowser.setIcon(tabs[i], iconURL);
-           this.checkIconURL(tabs[i], doc, iconURL, threadId);
-       }
-       }
-   } catch (ex) {
-       if (this.mPrefs.getBoolPref("debug"))
-       alert("reloadFavicon() threw exception " + ex);
-   }
+        try {
+            var threadId = this.mThreadId++;
+            var doc = TabContextMenu.contextTab.linkedBrowser.contentDocument;
+            var docURI = this.getDocumentURI(doc);
+            if (!doc.contentType || doc.contentType.match('^image/.+$') ||
+                !gBrowser.shouldLoadFavIcon(docURI))
+                return;
+            this.debug(threadId + ": Reloading favicon for " + docURI.spec);
+            var tabs = this.getTabsForDocument(docURI);
+            if (tabs.length > 0) {
+                var iconURL = this.getExplicitFaviconURL(doc) || docURI.prePath + "/favicon.ico";
+                var iconURI = this.mIOS.newURI(iconURL, null, this.getDocumentBaseURI(doc));
+                gBrowser.mFaviconService.removeFailedFavicon(iconURI);
+                for (var i = 0; i < tabs.length; ++i) {
+                    gBrowser.setIcon(tabs[i], iconURL);
+                    this.checkIconURL(tabs[i], doc, iconURL, threadId);
+                }
+            }
+        } catch (ex) {
+            if (this.mPrefs.getBoolPref("debug"))
+                alert("reloadFavicon() threw exception " + ex);
+        }
     },
 
     debug: function(aMessage) {
-   if (this.mPrefs.getBoolPref("debug"))
-       this.mConsole.logStringMessage("Favidico: " + aMessage);
+        if (this.mPrefs.getBoolPref("debug"))
+            this.mConsole.logStringMessage("Favidico: " + aMessage);
     },
 
     showContextMenuItem: function(aEvent) {
-   try {
-       if (this.mPrefs.getBoolPref("addcontextmenuitem")) {
-       document.getElementById("favicon-reload").hidden = false;
-       var doc = document.popupNode.ownerDocument;
-       var docURI = this.getDocumentURI(doc);
-       this.debug("showContextMenuItem() " + docURI.spec);
-       document.getElementById("favicon-reload").disabled = !gBrowser.shouldLoadFavIcon(docURI);
-       } else {
-       document.getElementById("favicon-reload").hidden = true;
-       }
-   } catch (ex) {
-       if (this.mPrefs.getBoolPref("debug"))
-       alert("showContextMenuItem() threw exception " + ex);
-   }
+        try {
+            if (this.mPrefs.getBoolPref("addcontextmenuitem")) {
+                document.getElementById("favicon-reload").hidden = false;
+                var doc = document.popupNode.ownerDocument;
+                var docURI = this.getDocumentURI(doc);
+                this.debug("showContextMenuItem() " + docURI.spec);
+                document.getElementById("favicon-reload").disabled = !gBrowser.shouldLoadFavIcon(docURI);
+            } else {
+                document.getElementById("favicon-reload").hidden = true;
+            }
+        } catch (ex) {
+            if (this.mPrefs.getBoolPref("debug"))
+                alert("showContextMenuItem() threw exception " + ex);
+        }
     },
  
     showTabContextMenuItem: function(aEvent) {
-   try {
-       if (this.mPrefs.getBoolPref("addtabmenuitem")) {
-       document.getElementById("favicon-reloadTab").hidden = false;
-       var doc = TabContextMenu.contextTab.linkedBrowser.contentDocument;
-       var docURI = this.getDocumentURI(doc);
-       this.debug("showTabContextMenuItem() " + docURI.spec);
-       document.getElementById("favicon-reloadTab").disabled = !gBrowser.shouldLoadFavIcon(docURI);
-       } else {
-       document.getElementById("favicon-reloadTab").hidden = true;
-       }
-   } catch (ex) {
-       if (this.mPrefs.getBoolPref("debug"))
-       alert("showTabContextMenuItem() threw exception " + ex);
-   }
+        try {
+            if (this.mPrefs.getBoolPref("addtabmenuitem")) {
+                document.getElementById("favicon-reloadTab").hidden = false;
+                var doc = TabContextMenu.contextTab.linkedBrowser.contentDocument;
+                var docURI = this.getDocumentURI(doc);
+                this.debug("showTabContextMenuItem() " + docURI.spec);
+                document.getElementById("favicon-reloadTab").disabled = !gBrowser.shouldLoadFavIcon(docURI);
+            } else {
+                document.getElementById("favicon-reloadTab").hidden = true;
+            }
+        } catch (ex) {
+            if (this.mPrefs.getBoolPref("debug"))
+                alert("showTabContextMenuItem() threw exception " + ex);
+        }
     },
 
     parsePrefString: function(aPref, aValue) {
-   var sites = aPref.split(',');
-   for (var i = 0; i < sites.length; ++i) {
-       if (sites[i])
-       this.mSitePrefs[sites[i]] = aValue;
-   }
+        var sites = aPref.split(',');
+        for (var i = 0; i < sites.length; ++i) {
+            if (sites[i])
+                this.mSitePrefs[sites[i]] = aValue;
+        }
     },
 
     parsePreferences: function() {
-   this.mSitePrefs = new Array();
-   this.parsePrefString(this.mPrefs.getCharPref("sites.always"), 1);
-   this.parsePrefString(this.mPrefs.getCharPref("sites.never"), -1);
-   if (this.mPrefs.getBoolPref("debug")) {
-       for (var host in this.mSitePrefs)
-       this.debug('site pref: ' + host + ' -> ' + this.mSitePrefs[host]);
-   }
+        this.mSitePrefs = new Array();
+        this.parsePrefString(this.mPrefs.getCharPref("sites.always"), 1);
+        this.parsePrefString(this.mPrefs.getCharPref("sites.never"), -1);
+        if (this.mPrefs.getBoolPref("debug")) {
+            for (var host in this.mSitePrefs)
+                this.debug('site pref: ' + host + ' -> ' + this.mSitePrefs[host]);
+        }
     },
 
     init: function() {
-   // register main listener, responsible for creating the favicons
-   gBrowser.addEventListener("pageshow", this.bind(this.onPageShow), false);
+        // register main listener, responsible for creating the favicons
+        gBrowser.addEventListener("pageshow", this.bind(this.onPageShow), false);
 
-   // register context menu listener
-   document.getElementById('contentAreaContextMenu')
-   .addEventListener('popupshowing', this.bind(this.showContextMenuItem), false);
+        // register context menu listener
+        document.getElementById('contentAreaContextMenu')
+        .addEventListener('popupshowing', this.bind(this.showContextMenuItem), false);
 
-   // register tab context menu listener
-   document.getElementById('tabContextMenu')
-   .addEventListener('popupshowing', this.bind(this.showTabContextMenuItem), false);
+        // register tab context menu listener
+        document.getElementById('tabContextMenu')
+        .addEventListener('popupshowing', this.bind(this.showTabContextMenuItem), false);
 
-   // add preference observer
-   this.mPrefs.QueryInterface(Components.interfaces.nsIPrefBranch2);
-   this.mPrefs.addObserver("", {
-       observe: function(aSubject, aTopic, aData) {
-           gFavidico.debug("mPrefs.observe() " + aData);
-           if (aTopic != "nsPref:changed" || aData.indexOf("sites.") == -1)
-           return;
-           gFavidico.parsePreferences();
-       }
-       }, false);
-   this.parsePreferences();
+        // add preference observer
+        this.mPrefs.QueryInterface(Components.interfaces.nsIPrefBranch2);
+        this.mPrefs.addObserver("", {
+                observe: function(aSubject, aTopic, aData) {
+                    gFavidico.debug("mPrefs.observe() " + aData);
+                    if (aTopic != "nsPref:changed" || aData.indexOf("sites.") == -1)
+                        return;
+                    gFavidico.parsePreferences();
+                }
+            }, false);
+        this.parsePreferences();
     }
 };
