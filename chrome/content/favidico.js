@@ -283,11 +283,7 @@ var gFavidico = {
     },
 
     getExplicitFaviconURL: function(aDoc) {
-        var head = aDoc.getElementsByTagName('head');
-        if (head.length != 1)
-            return;
-        head = head.item(0);
-        var links = head.getElementsByTagName('link');
+        var links = aDoc.getElementsByTagName('link');
         for (var i = 0; i < links.length; i++) {
             var rel = links.item(i).getAttribute('rel');
             if (rel && (rel.toLowerCase() == 'shortcut icon' || rel.toLowerCase() == 'icon')) {
